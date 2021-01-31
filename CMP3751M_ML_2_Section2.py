@@ -10,8 +10,7 @@ E-mail: 25344136@students.lincoln.ac.uk
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
-from CMP3751M_ML_2_Section1 import max_min_normalization, import_data
-
+from CMP3751M_ML_2_Section1 import max_min_normalization, import_data, z_score
 
 """
 Section 3
@@ -23,15 +22,17 @@ def data_processing():
     """Data Normalisation & Shuffle, Split Data"""
     [df, data] = import_data()  # Import the origin data
     data_status = df['Status']  # Status list
-    data_normal = max_min_normalization(data)  # Data Normalisation
-    data_normal['Status'] = data_status  # Add Status list into data_normal
+    data_normal = z_score(data)  # Data Normalisation
+    print(data_normal)
 
-    # Convert healthy = 0, cancerous = 1
-    data_normal['Status'] = data_normal['Status'].apply(lambda x: 0 if 'healthy' in x else 1)
+    # data_normal['Status'] = data_status  # Add Status list into data_normal
+    # # Convert healthy = 0, cancerous = 1
+    # data_normal['Status'] = data_normal['Status'].apply(lambda x: 0 if 'healthy' in x else 1)
 
+    print(data_status)
     # Shuffle data frame and split tge training set and testing set
-    data_random = data_normal.sample(frac=1).reset_index(drop=True)  # Shuffle the data
-    X_train, X_test, y_train, y_test = train_test_split(data_random, data_status, test_size=0.1,
+    # data_random = data_normal.sample(frac=1).reset_index(drop=True)  # Shuffle the data
+    X_train, X_test, y_train, y_test = train_test_split(data_normal, data_status, test_size=0.2,
                                                         random_state=0)  # Split data set
 
     ann_model = MLPClassifier(hidden_layer_sizes=[500, 500], activation='logistic', solver='sgd', alpha=1e-4,
