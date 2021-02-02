@@ -21,7 +21,7 @@ Data import, summary, pre-processing and visualisation
 def import_data():
     # Import the dataset by read_excel function
     df = pd.read_excel('clinical_dataset.xlsx', engine='openpyxl')
-    print("The original dataset: \n{0}".format(df))  # Formatted output
+    # print("The original dataset: \n{0}".format(df))  # Formatted output
     data = df.drop(['Status'], axis=1)  # Drop the Status list
     return df, data
 
@@ -84,11 +84,12 @@ def statistics(dataset, name):
 def find_missing_value(dataset):
     """Find missing values"""
     missing_value = dataset.isnull().any()  # Determining "columns"
-    for i in range(np.shape(missing_value)[0]):
-        if missing_value[i] == 'True':
-            print('The column %d has missing values' % i)
-        else:
-            print('There are no missing values in column %d' % i)
+    print("The feedback of missing values\n", missing_value)
+    # for i in range(np.shape(missing_value)[0]):
+    #     if missing_value[i] == 'True':
+    #         print('The column %d has missing values' % i)
+    #     else:
+    #         print('There are no missing values in column %d' % i)
     return
 
 
@@ -99,6 +100,12 @@ def z_score(dataset):
     std = np.std(dataset)  # Calculate the standard deviation value
     data_z_score = (dataset - avg) / std  # Z-Score
     return data_z_score
+
+
+def max_min_normalization(dataset):
+    """[0,1] Normalization"""
+    data_normal = (dataset - np.min(dataset)) / (np.max(dataset) - np.min(dataset))
+    return data_normal
 
 
 def box_density_plots(df):
@@ -125,12 +132,6 @@ def box_density_plots(df):
     plt.legend()
     plt.show()
     return
-
-
-def max_min_normalization(dataset):
-    """[0,1] Normalization"""
-    data_normal = (dataset - np.min(dataset)) / (np.max(dataset) - np.min(dataset))
-    return data_normal
 
 
 def main():
