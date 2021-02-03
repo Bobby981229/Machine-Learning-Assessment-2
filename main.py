@@ -59,12 +59,14 @@ Y = np.array(Y)
 # 分割所需要的包
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state=0)
 
-# print("*************ANN**************")
-# model = MLPClassifier(hidden_layer_sizes=[500, 500], activation='logistic', solver='lbfgs', random_state=0, alpha=0.1)
-# model.fit(X_train, y_train)
-# y_pred = model.predict(X_test)
-# report = classification_report(y_test, y_pred)
-# print(report)
+print("*************ANN**************")
+model = MLPClassifier(hidden_layer_sizes=[500, 500], activation='logistic', solver='lbfgs', random_state=0, alpha=0.1)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+report = classification_report(y_test, y_pred)
+accuracy = model.score(X_test, y_test)
+print(accuracy)
+print(report)
 #
 # # random forests classifier
 # print("*********random forests**********")
