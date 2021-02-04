@@ -7,15 +7,15 @@ ID_No: 25344136
 E-mail: 25344136@students.lincoln.ac.uk
 """
 
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import seaborn as sns
-
 """
 Section 1
 Data import, summary, pre-processing and visualisation
 """
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
 
 
 def import_data():

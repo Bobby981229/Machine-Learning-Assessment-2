@@ -6,20 +6,20 @@ School: University of Lincoln, School of Computer Science
 ID_No: 25344136
 E-mail: 25344136@students.lincoln.ac.uk
 """
-from warnings import filterwarnings
 
+"""
+Section 3
+Designing algorithms
+"""
+
+from warnings import filterwarnings
 filterwarnings('ignore')
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.neural_network import MLPClassifier
 from CMP3751M_ML_2_Section1 import max_min_normalization, import_data
 from sklearn import metrics
-"""
-Section 3
-Designing algorithms
-"""
 
 
 def data_processing():
@@ -81,6 +81,7 @@ def forests_plot(x_train, x_test, y_train, y_test, tree_number, min_samples):
     # Generate the plot
     plt.plot(tree_number, acc_list_5, color='red', label="min_samples_split: 5", linestyle='--')
     plt.plot(tree_number, acc_list_50, color='blue', label="min_samples_split: 50", linestyle='-.')
+    plt.xlabel('Trees'), plt.ylabel('accuracy'), plt.title("Trees - Accuracy Plot")
     plt.legend()
     plt.show()
     return
@@ -94,8 +95,8 @@ def main():
     # ann_model(x_train, x_test, y_train, y_test)  # ANN Classifier
     acc_sam1 = forests_model(x_train, x_test, y_train, y_test, 1000, 50)
     acc_sam2 = forests_model(x_train, x_test, y_train, y_test, 1000, 5)
-    print('Samples: 50 Forests Model Accuracy: ', acc_sam1)
-    print('Samples: 05 Forests Model Accuracy: ', acc_sam2)
+    print('Min Samples:50  Forests Model Accuracy:', acc_sam1)
+    print('Min Samples:05  Forests Model Accuracy:', acc_sam2)
     forests_plot(x_train, x_test, y_train, y_test, tree_number, min_samples)
 
 
